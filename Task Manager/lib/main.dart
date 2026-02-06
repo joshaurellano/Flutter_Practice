@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(myApp());
+void main() => runApp(MyApp());
 
-class myApp extends StatelessWidget {
-  const myApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'practice',
+      title: 'Task Manager',
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Task Manager'),
@@ -31,6 +31,7 @@ class _AppBodyState extends State<AppBody> {
   List<String> tasks = [];
   final taskController = TextEditingController();
   final formKey = GlobalKey <FormState>();
+  
 
   void addTask() {
     setState(() {
@@ -80,15 +81,18 @@ class _AppBodyState extends State<AppBody> {
           SizedBox(height: 15),
           
           Expanded(
-            child: ListView.builder(
+            child: tasks.isEmpty ? Center(
+              child: const Text('Hooray!! No tasks available as of the moment')) : 
+              
+              ListView.builder(
               padding: EdgeInsets.all(10),
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   leading: Icon(Icons.check_box_outline_blank),
                   title: Text(tasks[index]),
                   trailing: Icon(Icons.delete),
-                );
-              },
+              );
+            },
               itemCount: tasks.length,
           )
           )
